@@ -1,0 +1,130 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GREEN GROW PRIVATE LIMITED</title>
+  <meta name="description" content="Green Grow Private Limited — Monthly leaderboard, global reward pool, join & grow." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <div class="brand-mark">GG</div>
+        <div class="brand-text">
+          <div class="brand-title">GREEN GROW</div>
+          <div class="brand-sub">PRIVATE LIMITED</div>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="#how">How it works</a>
+        <a href="#rewards">Rewards</a>
+        <button class="btn btn-cta" id="openJoin">Join Now</button>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1 class="hero-title">GREEN GROW</h1>
+          <p class="hero-sub">PRIVATE LIMITED</p>
+
+          <p class="lead">Fast, transparent & competitive. Join the monthly leaderboard, earn points by recruiting and selling — share the global reward pool proportionally.</p>
+
+          <div class="card snapshot">
+            <div class="row">
+              <div class="stat"><div class="num">₹10,000</div><div class="label">Joining fee</div></div>
+              <div class="stat"><div class="num">₹3,000</div><div class="label">Product cost</div></div>
+              <div class="stat"><div class="num">₹1,000</div><div class="label">Sponsor commission</div></div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary" id="openJoin2">Pay ₹10,000</button>
+              <a class="btn btn-ghost" href="#how">Learn more</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-right">
+          <div class="card info">
+            <h3>Monthly pool & points</h3>
+            <ul>
+              <li><strong>10</strong> points per recruit</li>
+              <li><strong>1</strong> point per product sold</li>
+              <li>Global pool is distributed monthly by proportional points</li>
+            </ul>
+
+            <hr/>
+            <div class="small">Top 5 monthly winners get special physical rewards + cash bonuses. All payouts happen on month-end. <strong>Disclaimer:</strong> This is a demo frontend. Seek legal & financial advice before taking payments or running reward pools.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="how" class="section container">
+      <h2>How it works</h2>
+      <ol class="how-list">
+        <li>Joining fee: <strong>₹10,000</strong> (includes product ₹3,000).</li>
+        <li>Sponsor gets <strong>₹1,000</strong> commission on recruit.</li>
+        <li>Remaining funds flow into the monthly <em>global commission pool</em>.</li>
+        <li>Points: <strong>10</strong> per recruit; <strong>1</strong> per product sold.</li>
+        <li>Global pool distributed proportionally to accumulated points.</li>
+      </ol>
+    </section>
+
+    <section id="rewards" class="section container">
+      <h2>Top 5 monthly rewards</h2>
+      <div class="grid rewards-grid">
+        <div class="reward card"><div class="rank">1</div><div class="title">Car + ₹50,000</div></div>
+        <div class="reward card"><div class="rank">2</div><div class="title">Bike + ₹40,000</div></div>
+        <div class="reward card"><div class="rank">3</div><div class="title">Gold + ₹30,000</div></div>
+        <div class="reward card"><div class="rank">4</div><div class="title">iPhone + ₹20,000</div></div>
+        <div class="reward card"><div class="rank">5</div><div class="title">Foreign Trip + ₹10,000</div></div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2>Spin prize</h2>
+      <p class="small">Each month a random spin (from profit fund) picks one active customer to win an extra cash reward between ₹10,000–₹100,000. (Server-side logic required; demo only.)</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> GREEN GROW PRIVATE LIMITED</div>
+      <div class="small muted">Demo site—do not collect money without proper legal & financial setup.</div>
+    </div>
+  </footer>
+
+  <!-- Join Modal (hidden) -->
+  <div class="modal" id="joinModal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" id="closeModal">✕</button>
+      <h3>Join GREEN GROW</h3>
+      <form id="joinForm">
+        <label>Name <input name="name" required /></label>
+        <label>Phone <input name="phone" required /></label>
+        <label>City <input name="city" /></label>
+        <label>Referrer (optional) <input name="referrer" /></label>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Proceed to Pay ₹10,000</button>
+          <button type="button" class="btn btn-ghost" id="cancelJoin">Cancel</button>
+        </div>
+        <div class="small muted">Payment integration not included — demo only.</div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
