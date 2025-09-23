@@ -111,19 +111,20 @@
             </div>
             
             <!-- Target Board -->
-            <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-2xl mx-auto" data-aos="fade-up">
-                <h3 class="text-xl font-semibold text-center text-gray-700 mb-6">Target Progress (3000 Points)</h3>
-                <div class="flex flex-col items-center">
-                    <div class="relative w-64 h-64 mb-6">
-                        <canvas id="progressChart"></canvas>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-3xl font-bold text-gray-800" id="progressPercentage">0%</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-center">Current progress towards our global target. Join us to contribute!</p>
-                </div>
+           <!-- Target Board -->
+<div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-2xl mx-auto" data-aos="fade-up">
+    <h3 class="text-xl font-semibold text-center text-gray-700 mb-6">Target Progress (3000 Points)</h3>
+    <div class="flex flex-col items-center">
+        <div class="relative w-64 h-64 mb-6">
+            <canvas id="progressChart"></canvas>
+            <div class="absolute inset-0 flex items-center justify-center flex-col">
+                <span class="text-3xl font-bold text-gray-800" id="progressPercentage">0%</span>
+                <span class="text-lg text-gray-600 mt-2" id="progressText">0/3000 Points</span>
             </div>
         </div>
+        <p class="text-gray-600 text-center">Current progress towards our global target. Join us to contribute!</p>
+    </div>
+</div>
     </section>
 
     <!-- Leaderboard Section -->
@@ -406,49 +407,66 @@
         }, 500);
 
         // Progress chart
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('progressChart').getContext('2d');
-            const progressPercentage = document.getElementById('progressPercentage');
-            const currentProgress = 82.9; // 180 / 3000 * 100
-            
-            const progressChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: [currentProgress, 100 - currentProgress],
-                        backgroundColor: ['#0A8754', '#E5E7EB'],
-                        borderWidth: 0
-                    }]
+       // Progress chart
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    const progressPercentage = document.getElementById('progressPercentage');
+    const progressText = document.getElementById('progressText');
+    
+    const targetPoints = 3000; // ✅ YAHAN TARGET CHANGE KARO
+    const currentPoints = 2487; // ✅ YAHAN CURRENT POINTS CHANGE KARO
+    const currentProgress = (currentPoints / targetPoints) * 100;
+    
+    const progressChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [currentProgress, 100 - currentProgress],
+                backgroundColor: ['#0A8754', '#E5E7EB'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '80%',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
                 },
-                options: {
-                    cutout: '80%',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            enabled: false
-                        }
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    }
+                tooltip: {
+                    enabled: false
                 }
-            });
-            
-            // Animate percentage counter
-            let currentPercent = 0;
-            const interval = setInterval(() => {
-                currentPercent += 1;
-                progressPercentage.textContent = currentPercent + '%';
-                if (currentPercent >= Math.floor(currentProgress)) {
-                    clearInterval(interval);
-                }
-            }, 20);
-        });
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    });
+    
+    // Heading mein bhi target update karo
+    document.querySelector('#global-pool h3').textContent = `Target Progress (${targetPoints} Points)`;
+    
+    // Animate percentage counter aur points display
+    let currentPercent = 0;
+    let currentDisplayPoints = 0;
+    const pointsIncrement = currentPoints / 50; // Smooth animation ke liye
+    
+    const interval = setInterval(() => {
+        currentPercent += 2;
+        currentDisplayPoints += pointsIncrement;
+        
+        if (currentPercent >= Math.floor(currentProgress)) {
+            currentPercent = Math.floor(currentProgress);
+            currentDisplayPoints = currentPoints;
+            clearInterval(interval);
+        }
+        
+        progressPercentage.textContent = currentPercent + '%';
+        progressText.textContent = Math.floor(currentDisplayPoints).toLocaleString() + '/' + targetPoints.toLocaleString() + ' Points';
+    }, 40);
+});
 
         // Leaderboard data
        const leaderboardData = [
