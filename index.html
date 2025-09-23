@@ -91,7 +91,7 @@
                     </div>
                     <div class="flex items-end">
                         <span class="text-4xl font-bold text-gray-800" id="globalPoolCounter">0</span>
-                        <span class="text-lg text-gray-500 ml-2">USD</span>
+                        <span class="text-lg text-gray-500 ml-2">INR</span>
                     </div>
                 </div>
                 
@@ -117,7 +117,7 @@
                     <div class="relative w-64 h-64 mb-6">
                         <canvas id="progressChart"></canvas>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-3xl font-bold text-gray-800" id="progressPercentage">0%</span>
+                            <span class="text-3xl font-bold text-gray-800" id="progressPercentage">30%</span>
                         </div>
                     </div>
                     <p class="text-gray-600 text-center">Current progress towards our global target. Join us to contribute!</p>
@@ -401,8 +401,8 @@
 
         // Animate global pool and total points counters
         setTimeout(() => {
-            animateCounter('globalPoolCounter', 1250000);
-            animateCounter('totalPointsCounter', 2487);
+            animateCounter('globalPoolCounter', 25000);
+            animateCounter('totalPointsCounter', 1500);
         }, 500);
 
         // Progress chart
@@ -462,6 +462,7 @@
             { rank: 8, name: "Olivia Taylor", customerId: "GG54321", points: "6,890", recruits: 22 },
             { rank: 9, name: "Matthew Anderson", customerId: "GG19876", points: "6,210", recruits: 20 },
             { rank: 10, name: "Sophia Thomas", customerId: "GG76543", points: "5,780", recruits: 18 }
+             { rank: 10, name: "ATIF REHAN", customerId: "GG76545", points: "150", recruits: 15 }
         ];
 
         // Populate leaderboard
