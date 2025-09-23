@@ -11,53 +11,48 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
         .gradient-bg {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
         }
-        .green-accent {
-            color: #0A8754;
-        }
-        .green-bg {
-            background-color: #0A8754;
-        }
-        .hover-green:hover {
-            background-color: #087548;
-        }
-        .card-shadow {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        .brand-gradient {
+            background: linear-gradient(135deg, #0A8754 0%, #0D9488 50%, #2563EB 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         .progress-ring__circle {
-            transition: stroke-dashoffset 0.5s;
+            transition: stroke-dashoffset 0.35s;
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
+        .reward-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
     </style>
 </head>
-<body class="gradient-bg">
+<body class="gradient-bg min-h-screen">
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white shadow-sm z-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-xl font-bold green-accent">GREEN GROW</span>
+                    <span class="text-xl font-bold text-gray-800">GREEN <span class="text-green-600">GROW</span></span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#global-pool" class="text-gray-600 hover:text-gray-900 transition">Global Pool</a>
-                    <a href="#leaderboard" class="text-gray-600 hover:text-gray-900 transition">Leaderboard</a>
-                    <a href="#rewards" class="text-gray-600 hover:text-gray-900 transition">Rewards</a>
-                    <a href="#products" class="text-gray-600 hover:text-gray-900 transition">Products</a>
-                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition">Login</button>
+                    <a href="#global-pool" class="text-gray-600 hover:text-green-600 transition">Global Pool</a>
+                    <a href="#leaderboard" class="text-gray-600 hover:text-green-600 transition">Leaderboard</a>
+                    <a href="#rewards" class="text-gray-600 hover:text-green-600 transition">Rewards</a>
+                    <a href="#products" class="text-gray-600 hover:text-green-600 transition">Products</a>
                 </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button">
-                        <i data-feather="menu"></i>
+                <div class="flex items-center">
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition">
+                        Login
                     </button>
                 </div>
             </div>
@@ -65,69 +60,78 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto text-center" data-aos="fade-up">
-            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4">GREEN GROW</h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8">Growing Together, Globally</p>
-            <button class="px-8 py-3 rounded-full green-bg text-white hover-green transition text-lg font-medium">
-                Explore Now
-            </button>
+    <section class="relative py-20 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 brand-gradient">GREEN GROW</h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-8" data-aos="fade-up" data-aos-delay="100">Growing Together, Globally</p>
+                <button class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                    Explore Now
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- Global Pool Section -->
-    <section id="global-pool" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Global Pool & Points</h2>
+    <section id="global-pool" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Global Performance Metrics</h2>
             
-            <div class="grid md:grid-cols-2 gap-8 mb-16">
-                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-right">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Global Pool Card -->
+                <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-xl shadow-sm border border-gray-100" data-aos="fade-right">
                     <div class="flex items-center mb-4">
-                        <div class="p-3 rounded-full bg-green-100 mr-4">
-                            <i data-feather="globe" class="green-accent"></i>
+                        <div class="p-3 rounded-lg bg-green-100 mr-4">
+                            <i data-feather="globe" class="text-green-600"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Global Pool Amount</h3>
+                        <h3 class="text-xl font-semibold text-gray-700">Global Pool Amount</h3>
                     </div>
-                    <div class="text-4xl font-bold green-accent mb-2" id="globalPoolCounter">0</div>
-                    <p class="text-gray-500">Current pool value</p>
+                    <div class="flex items-end">
+                        <span class="text-4xl font-bold text-gray-800" id="globalPoolCounter">0</span>
+                        <span class="text-lg text-gray-500 ml-2">USD</span>
+                    </div>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-left">
+                <!-- Total Points Card -->
+                <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-xl shadow-sm border border-gray-100" data-aos="fade-left">
                     <div class="flex items-center mb-4">
-                        <div class="p-3 rounded-full bg-green-100 mr-4">
-                            <i data-feather="award" class="green-accent"></i>
+                        <div class="p-3 rounded-lg bg-blue-100 mr-4">
+                            <i data-feather="award" class="text-blue-600"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800">Total Points</h3>
+                        <h3 class="text-xl font-semibold text-gray-700">Total Points</h3>
                     </div>
-                    <div class="text-4xl font-bold green-accent mb-2" id="totalPointsCounter">0</div>
-                    <p class="text-gray-500">Community points accumulated</p>
+                    <div class="flex items-end">
+                        <span class="text-4xl font-bold text-gray-800" id="totalPointsCounter">0</span>
+                        <span class="text-lg text-gray-500 ml-2">Points</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="bg-gray-50 rounded-xl p-8 card-shadow max-w-2xl mx-auto" data-aos="fade-up">
-                <h3 class="text-xl font-semibold text-center text-gray-800 mb-6">Target Board</h3>
-                <div class="flex justify-center">
-                    <div class="relative w-64 h-64">
-                        <svg class="w-full h-full" viewBox="0 0 100 100">
-                            <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
-                            <circle class="text-green-500 progress-ring__circle" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" stroke-dasharray="251.2" stroke-dashoffset="calc(251.2 - (251.2 * 72) / 100)" />
-                        </svg>
-                        <div class="absolute inset-0 flex items-center justify-center flex-col">
-                            <span class="text-3xl font-bold green-accent">72%</span>
-                            <span class="text-gray-500">Complete</span>
+            <!-- Target Board -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-2xl mx-auto" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-center text-gray-700 mb-6">Target Progress (3000 Points)</h3>
+                <div class="flex flex-col items-center">
+                    <div class="relative w-64 h-64 mb-6">
+                        <canvas id="progressChart"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-3xl font-bold text-gray-800" id="progressPercentage">0%</span>
                         </div>
                     </div>
+                    <p class="text-gray-600 text-center">Current progress towards our global target. Join us to contribute!</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Leaderboard Section -->
-    <section id="leaderboard" class="py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Top Performers Leaderboard</h2>
+    <section id="leaderboard" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Top Performers Leaderboard</h2>
             
-            <div class="bg-white rounded-xl overflow-hidden card-shadow" data-aos="fade-up">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden" data-aos="fade-up">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -140,7 +144,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200" id="leaderboardBody">
-                            <!-- Rows will be added by JavaScript -->
+                            <!-- Rows will be populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -149,170 +153,176 @@
     </section>
 
     <!-- Rewards Section -->
-    <section id="rewards" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Achievements & Rewards</h2>
+    <section id="rewards" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Achievements & Rewards</h2>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
-                <!-- Top 5 Rewards -->
-                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="award" class="green-accent"></i>
+            <h3 class="text-xl font-semibold text-gray-700 mb-6" data-aos="fade-up">Top 5 Rewards</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+                <!-- Reward 1 -->
+                <div class="reward-card bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl shadow-sm border border-gray-100 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-center mb-4">
+                        <div class="p-4 rounded-full bg-amber-100">
+                            <i data-feather="award" class="text-amber-600 w-8 h-8"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 1</h3>
-                    <p class="text-gray-600 mb-4">Car</p>
-                    <p class="text-sm text-gray-500">Luxury vehicle for top performer</p>
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 1</h4>
+                    <p class="text-lg font-semibold text-center text-gray-700 mb-2">Luxury Car</p>
+                    <p class="text-gray-600 text-center text-sm">Drive home in style with our premium vehicle reward</p>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="award" class="green-accent"></i>
+                <!-- Reward 2 -->
+                <div class="reward-card bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-gray-100 transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-center mb-4">
+                        <div class="p-4 rounded-full bg-blue-100">
+                            <i data-feather="bike" class="text-blue-600 w-8 h-8"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 2</h3>
-                    <p class="text-gray-600 mb-4">Bike</p>
-                    <p class="text-sm text-gray-500">Premium motorcycle reward</p>
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 2</h4>
+                    <p class="text-lg font-semibold text-center text-gray-700 mb-2">Premium Bike</p>
+                    <p class="text-gray-600 text-center text-sm">High-performance bike for your active lifestyle</p>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="award" class="green-accent"></i>
+                <!-- Reward 3 -->
+                <div class="reward-card bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl shadow-sm border border-gray-100 transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex justify-center mb-4">
+                        <div class="p-4 rounded-full bg-yellow-100">
+                            <i data-feather="trending-up" class="text-yellow-600 w-8 h-8"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 3</h3>
-                    <p class="text-gray-600 mb-4">Gold</p>
-                    <p class="text-sm text-gray-500">100g pure gold investment</p>
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 3</h4>
+                    <p class="text-lg font-semibold text-center text-gray-700 mb-2">Gold Package</p>
+                    <p class="text-gray-600 text-center text-sm">Investment-grade gold for your financial security</p>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="award" class="green-accent"></i>
+                <!-- Reward 4 -->
+                <div class="reward-card bg-gradient-to-br from-gray-50 to-blue-50 p-6 rounded-xl shadow-sm border border-gray-100 transition duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex justify-center mb-4">
+                        <div class="p-4 rounded-full bg-gray-100">
+                            <i data-feather="smartphone" class="text-gray-600 w-8 h-8"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 4</h3>
-                    <p class="text-gray-600 mb-4">iPhone</p>
-                    <p class="text-sm text-gray-500">Latest smartphone model</p>
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 4</h4>
+                    <p class="text-lg font-semibold text-center text-gray-700 mb-2">Latest iPhone</p>
+                    <p class="text-gray-600 text-center text-sm">Stay connected with the newest technology</p>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="500">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="award" class="green-accent"></i>
+                <!-- Reward 5 -->
+                <div class="reward-card bg-gradient-to-br from-green-50 to-teal-50 p-6 rounded-xl shadow-sm border border-gray-100 transition duration-300" data-aos="fade-up" data-aos-delay="500">
+                    <div class="flex justify-center mb-4">
+                        <div class="p-4 rounded-full bg-green-100">
+                            <i data-feather="globe" class="text-green-600 w-8 h-8"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 5</h3>
-                    <p class="text-gray-600 mb-4">Foreign Trip</p>
-                    <p class="text-sm text-gray-500">All-expense paid vacation</p>
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 5</h4>
+                    <p class="text-lg font-semibold text-center text-gray-700 mb-2">Foreign Trip</p>
+                    <p class="text-gray-600 text-center text-sm">All-expenses paid international vacation</p>
                 </div>
             </div>
             
-            <h3 class="text-2xl font-bold text-center text-gray-900 mb-8" data-aos="fade-up">Monthly Passive Rewards</h3>
-            
-            <div class="grid md:grid-cols-5 gap-6">
-                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="dollar-sign" class="green-accent"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 1</h3>
-                    <p class="text-2xl font-bold green-accent mb-4">₹50,000</p>
-                    <p class="text-sm text-gray-500">Monthly passive income</p>
+            <h3 class="text-xl font-semibold text-gray-700 mb-6" data-aos="fade-up">Monthly Passive Rewards</h3>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <!-- Monthly Reward 1 -->
+                <div class="bg-gradient-to-br from-green-50 to-teal-50 p-6 rounded-xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 1</h4>
+                    <p class="text-2xl font-bold text-center text-green-600">₹50,000</p>
+                    <p class="text-gray-600 text-center text-sm mt-2">Monthly passive income</p>
                 </div>
                 
-                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="dollar-sign" class="green-accent"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 2</h3>
-                    <p class="text-2xl font-bold green-accent mb-4">₹40,000</p>
-                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                <!-- Monthly Reward 2 -->
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 2</h4>
+                    <p class="text-2xl font-bold text-center text-blue-600">₹40,000</p>
+                    <p class="text-gray-600 text-center text-sm mt-2">Monthly passive income</p>
                 </div>
                 
-                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="dollar-sign" class="green-accent"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 3</h3>
-                    <p class="text-2xl font-bold green-accent mb-4">₹30,000</p>
-                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                <!-- Monthly Reward 3 -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 3</h4>
+                    <p class="text-2xl font-bold text-center text-purple-600">₹30,000</p>
+                    <p class="text-gray-600 text-center text-sm mt-2">Monthly passive income</p>
                 </div>
                 
-                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="dollar-sign" class="green-accent"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 4</h3>
-                    <p class="text-2xl font-bold green-accent mb-4">₹20,000</p>
-                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                <!-- Monthly Reward 4 -->
+                <div class="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="400">
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 4</h4>
+                    <p class="text-2xl font-bold text-center text-amber-600">₹20,000</p>
+                    <p class="text-gray-600 text-center text-sm mt-2">Monthly passive income</p>
                 </div>
                 
-                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="500">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                        <i data-feather="dollar-sign" class="green-accent"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 5</h3>
-                    <p class="text-2xl font-bold green-accent mb-4">₹10,000</p>
-                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                <!-- Monthly Reward 5 -->
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 p-6 rounded-xl shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="500">
+                    <h4 class="text-xl font-bold text-center text-gray-800 mb-2">Top 5</h4>
+                    <p class="text-2xl font-bold text-center text-gray-600">₹10,000</p>
+                    <p class="text-gray-600 text-center text-sm mt-2">Monthly passive income</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Our Products</h2>
+    <section id="products" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Our Products</h2>
             
             <div class="text-center mb-12" data-aos="fade-up">
-                <button id="viewProductsBtn" class="px-8 py-3 rounded-full green-bg text-white hover-green transition text-lg font-medium">
+                <button id="viewProductsBtn" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition transform hover:scale-105">
                     View Products
                 </button>
             </div>
             
             <!-- Products Modal (hidden by default) -->
-            <div id="productsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-                <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div id="productsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+                <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-screen overflow-y-auto">
                     <div class="p-6">
                         <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-2xl font-bold text-gray-900">Product Catalog</h3>
+                            <h3 class="text-2xl font-bold text-gray-800">Our Product Categories</h3>
                             <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
                                 <i data-feather="x"></i>
                             </button>
                         </div>
                         
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
-                                <img src="http://static.photos/technology/640x360/1" alt="Product 1" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Premium Package</h4>
-                                <p class="text-gray-600 mb-4">Our flagship product with all premium features</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-lg font-bold green-accent">₹15,999</span>
-                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
-                                </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Product 1 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <img src="http://static.photos/nature/320x240/1" alt="Product 1" class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Organic Supplements</h4>
+                                <p class="text-gray-600 text-sm">Premium quality organic health supplements for daily wellness.</p>
                             </div>
                             
-                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
-                                <img src="http://static.photos/technology/640x360/2" alt="Product 2" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Standard Package</h4>
-                                <p class="text-gray-600 mb-4">Great value with essential features</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-lg font-bold green-accent">₹9,999</span>
-                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
-                                </div>
+                            <!-- Product 2 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <img src="http://static.photos/nature/320x240/2" alt="Product 2" class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Skincare Range</h4>
+                                <p class="text-gray-600 text-sm">Natural skincare products for radiant and healthy skin.</p>
                             </div>
                             
-                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
-                                <img src="http://static.photos/technology/640x360/3" alt="Product 3" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Basic Package</h4>
-                                <p class="text-gray-600 mb-4">Entry-level product for beginners</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-lg font-bold green-accent">₹5,999</span>
-                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
-                                </div>
+                            <!-- Product 3 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <img src="http://static.photos/nature/320x240/3" alt="Product 3" class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Home Essentials</h4>
+                                <p class="text-gray-600 text-sm">Eco-friendly home cleaning and care products.</p>
                             </div>
                             
-                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
-                                <img src="http://static.photos/technology/640x360/4" alt="Product 4" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Starter Kit</h4>
-                                <p class="text-gray-600 mb-4">Perfect for trying out our system</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-lg font-bold green-accent">₹2,999</span>
-                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
-                                </div>
+                            <!-- Product 4 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <img src="http://static.photos/nature/320x240/4" alt="Product 4" class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Nutritional Foods</h4>
+                                <p class="text-gray-600 text-sm">Healthy and delicious nutritional food options.</p>
+                            </div>
+                            
+                            <!-- Product 5 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <img src="http://static.photos/nature/320x240/5" alt="Product 5" class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Fitness Gear</h4>
+                                <p class="text-gray-600 text-sm">High-quality fitness equipment for your home gym.</p>
+                            </div>
+                            
+                            <!-- Product 6 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <img src="http://static.photos/nature/320x240/6" alt="Product 6" class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Wellness Books</h4>
+                                <p class="text-gray-600 text-sm">Educational materials for holistic health and wellness.</p>
                             </div>
                         </div>
                     </div>
@@ -322,12 +332,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8">
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4">GREEN GROW</h3>
-                    <p class="text-gray-400">Growing Together, Globally</p>
+                    <p class="text-gray-400">Growing Together, Globally. Join our community for sustainable growth and success.</p>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
@@ -343,20 +353,20 @@
                     <ul class="space-y-2">
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Disclaimer</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cookie Policy</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
                     <ul class="space-y-2">
-                        <li class="flex items-center text-gray-400"><i data-feather="mail" class="mr-2"></i> info@greengrow.com</li>
-                        <li class="flex items-center text-gray-400"><i data-feather="phone" class="mr-2"></i> +1 (555) 123-4567</li>
-                        <li class="flex items-center text-gray-400"><i data-feather="map-pin" class="mr-2"></i> 123 Business Ave, Suite 100</li>
+                        <li class="flex items-center text-gray-400"><i data-feather="mail" class="mr-2 w-4 h-4"></i> info@greengrow.com</li>
+                        <li class="flex items-center text-gray-400"><i data-feather="phone" class="mr-2 w-4 h-4"></i> +1 (555) 123-4567</li>
+                        <li class="flex items-center text-gray-400"><i data-feather="map-pin" class="mr-2 w-4 h-4"></i> 123 Business Ave, Suite 100</li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>© 2023 GREEN GROW. All rights reserved.</p>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 GREEN GROW. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -369,58 +379,96 @@
             once: true
         });
 
-        // Initialize Feather Icons
+        // Initialize feather icons
         feather.replace();
 
-        // Counter animation for statistics
-        function animateCounter(elementId, targetValue, duration = 2000) {
+        // Counter animations
+        function animateCounter(elementId, target, duration = 2000) {
             const element = document.getElementById(elementId);
             const start = 0;
-            const increment = targetValue / (duration / 16);
+            const increment = target / (duration / 16);
             let current = start;
             
             const timer = setInterval(() => {
                 current += increment;
-                if (current >= targetValue) {
+                if (current >= target) {
                     clearInterval(timer);
-                    current = targetValue;
+                    current = target;
                 }
                 element.textContent = Math.floor(current).toLocaleString();
             }, 16);
         }
 
-        // Animate counters when they come into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter('globalPoolCounter', 12500000);
-                    animateCounter('totalPointsCounter', 8425000);
-                    observer.unobserve(entry.target);
+        // Animate global pool and total points counters
+        setTimeout(() => {
+            animateCounter('globalPoolCounter', 1250000);
+            animateCounter('totalPointsCounter', 2487);
+        }, 500);
+
+        // Progress chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            const progressPercentage = document.getElementById('progressPercentage');
+            const currentProgress = 82.9; // 2487 / 3000 * 100
+            
+            const progressChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [currentProgress, 100 - currentProgress],
+                        backgroundColor: ['#0A8754', '#E5E7EB'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '80%',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
                 }
             });
-        }, { threshold: 0.5 });
-
-        observer.observe(document.getElementById('global-pool'));
+            
+            // Animate percentage counter
+            let currentPercent = 0;
+            const interval = setInterval(() => {
+                currentPercent += 1;
+                progressPercentage.textContent = currentPercent + '%';
+                if (currentPercent >= Math.floor(currentProgress)) {
+                    clearInterval(interval);
+                }
+            }, 20);
+        });
 
         // Leaderboard data
         const leaderboardData = [
-            { rank: 1, name: "Alex Johnson", customerId: "GG12345", points: "1,250,000", recruits: 42 },
-            { rank: 2, name: "Sarah Williams", customerId: "GG12346", points: "1,100,000", recruits: 38 },
-            { rank: 3, name: "Michael Brown", customerId: "GG12347", points: "980,000", recruits: 35 },
-            { rank: 4, name: "Emily Davis", customerId: "GG12348", points: "875,000", recruits: 32 },
-            { rank: 5, name: "David Miller", customerId: "GG12349", points: "820,000", recruits: 30 },
-            { rank: 6, name: "Jessica Wilson", customerId: "GG12350", points: "790,000", recruits: 28 },
-            { rank: 7, name: "Daniel Moore", customerId: "GG12351", points: "750,000", recruits: 27 },
-            { rank: 8, name: "Olivia Taylor", customerId: "GG12352", points: "710,000", recruits: 26 },
-            { rank: 9, name: "James Anderson", customerId: "GG12353", points: "680,000", recruits: 25 },
-            { rank: 10, name: "Sophia Thomas", customerId: "GG12354", points: "650,000", recruits: 24 }
+            { rank: 1, name: "Alex Johnson", customerId: "GG78945", points: "12,450", recruits: 42 },
+            { rank: 2, name: "Sarah Williams", customerId: "GG65432", points: "11,890", recruits: 38 },
+            { rank: 3, name: "Michael Brown", customerId: "GG32198", points: "10,750", recruits: 35 },
+            { rank: 4, name: "Emily Davis", customerId: "GG98765", points: "9,820", recruits: 32 },
+            { rank: 5, name: "David Miller", customerId: "GG45678", points: "8,950", recruits: 29 },
+            { rank: 6, name: "Jessica Wilson", customerId: "GG23456", points: "8,120", recruits: 26 },
+            { rank: 7, name: "Daniel Moore", customerId: "GG87654", points: "7,430", recruits: 24 },
+            { rank: 8, name: "Olivia Taylor", customerId: "GG54321", points: "6,890", recruits: 22 },
+            { rank: 9, name: "Matthew Anderson", customerId: "GG19876", points: "6,210", recruits: 20 },
+            { rank: 10, name: "Sophia Thomas", customerId: "GG76543", points: "5,780", recruits: 18 }
         ];
 
         // Populate leaderboard
         const leaderboardBody = document.getElementById('leaderboardBody');
-        leaderboardData.forEach(item => {
+        leaderboardData.forEach((item, index) => {
             const row = document.createElement('tr');
-            row.className = 'hover:bg-gray-50 transition';
+            row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
             row.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.rank}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.name}</td>
@@ -433,8 +481,8 @@
 
         // Products modal functionality
         const viewProductsBtn = document.getElementById('viewProductsBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
         const productsModal = document.getElementById('productsModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
 
         viewProductsBtn.addEventListener('click', () => {
             productsModal.classList.remove('hidden');
@@ -452,16 +500,6 @@
                 productsModal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
             }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
         });
     </script>
 </body>
