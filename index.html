@@ -4,428 +4,465 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GREEN GROW - Growing Together, Globally</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+        }
+        .green-accent {
+            color: #0A8754;
+        }
+        .green-bg {
+            background-color: #0A8754;
+        }
+        .hover-green:hover {
+            background-color: #087548;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
         .progress-ring__circle {
-            transition: stroke-dashoffset 0.35s;
+            transition: stroke-dashoffset 0.5s;
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <div id="root"></div>
+<body class="gradient-bg">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold green-accent">GREEN GROW</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#global-pool" class="text-gray-600 hover:text-gray-900 transition">Global Pool</a>
+                    <a href="#leaderboard" class="text-gray-600 hover:text-gray-900 transition">Leaderboard</a>
+                    <a href="#rewards" class="text-gray-600 hover:text-gray-900 transition">Rewards</a>
+                    <a href="#products" class="text-gray-600 hover:text-gray-900 transition">Products</a>
+                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition">Login</button>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <script type="text/babel">
-        const { motion, AnimatePresence } = window.Motion;
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center" data-aos="fade-up">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4">GREEN GROW</h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-8">Growing Together, Globally</p>
+            <button class="px-8 py-3 rounded-full green-bg text-white hover-green transition text-lg font-medium">
+                Explore Now
+            </button>
+        </div>
+    </section>
 
-        function App() {
-            const [isProductsOpen, setIsProductsOpen] = React.useState(false);
-            const [globalPool, setGlobalPool] = React.useState(0);
-            const [totalPoints, setTotalPoints] = React.useState(0);
-            const [progress, setProgress] = React.useState(0);
-
-            React.useEffect(() => {
-                feather.replace();
+    <!-- Global Pool Section -->
+    <section id="global-pool" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Global Pool & Points</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-right">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-green-100 mr-4">
+                            <i data-feather="globe" class="green-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Global Pool Amount</h3>
+                    </div>
+                    <div class="text-4xl font-bold green-accent mb-2" id="globalPoolCounter">0</div>
+                    <p class="text-gray-500">Current pool value</p>
+                </div>
                 
-                // Animate counters
-                const animateCounters = () => {
-                    let startPool = 0;
-                    const endPool = 12500000;
-                    const duration = 2000;
-                    const increment = endPool / (duration / 16);
-                    
-                    const timer = setInterval(() => {
-                        startPool += increment;
-                        if (startPool >= endPool) {
-                            startPool = endPool;
-                            clearInterval(timer);
-                        }
-                        setGlobalPool(Math.floor(startPool).toLocaleString());
-                    }, 16);
-
-                    let startPoints = 0;
-                    const endPoints = 8425000;
-                    const pointsIncrement = endPoints / (duration / 16);
-                    
-                    const pointsTimer = setInterval(() => {
-                        startPoints += pointsIncrement;
-                        if (startPoints >= endPoints) {
-                            startPoints = endPoints;
-                            clearInterval(pointsTimer);
-                        }
-                        setTotalPoints(Math.floor(startPoints).toLocaleString());
-                    }, 16);
-
-                    // Animate progress
-                    let startProgress = 0;
-                    const endProgress = 75;
-                    const progressIncrement = endProgress / (duration / 16);
-                    
-                    const progressTimer = setInterval(() => {
-                        startProgress += progressIncrement;
-                        if (startProgress >= endProgress) {
-                            startProgress = endProgress;
-                            clearInterval(progressTimer);
-                        }
-                        setProgress(Math.floor(startProgress));
-                    }, 16);
-                };
-
-                animateCounters();
-            }, []);
-
-            const leaderboardData = [
-                { rank: 1, name: "Alex Johnson", customerId: "GG00123", points: "1,250,000", recruits: 42 },
-                { rank: 2, name: "Sarah Williams", customerId: "GG00145", points: "1,120,000", recruits: 38 },
-                { rank: 3, name: "Michael Brown", customerId: "GG00167", points: "980,500", recruits: 35 },
-                { rank: 4, name: "Emily Davis", customerId: "GG00189", points: "875,000", recruits: 32 },
-                { rank: 5, name: "David Miller", customerId: "GG00201", points: "760,000", recruits: 28 },
-                { rank: 6, name: "Jessica Wilson", customerId: "GG00234", points: "690,000", recruits: 25 },
-                { rank: 7, name: "Daniel Moore", customerId: "GG00256", points: "625,000", recruits: 22 },
-                { rank: 8, name: "Olivia Taylor", customerId: "GG00278", points: "580,000", recruits: 20 },
-                { rank: 9, name: "Matthew Anderson", customerId: "GG00301", points: "520,000", recruits: 18 },
-                { rank: 10, name: "Sophia Thomas", customerId: "GG00323", points: "490,000", recruits: 17 }
-            ];
-
-            const rewards = [
-                { rank: 1, title: "Luxury Car", icon: "car", monthly: "₹50,000" },
-                { rank: 2, title: "Premium Bike", icon: "bike", monthly: "₹40,000" },
-                { rank: 3, title: "Gold Package", icon: "award", monthly: "₹30,000" },
-                { rank: 4, title: "Latest iPhone", icon: "smartphone", monthly: "₹20,000" },
-                { rank: 5, title: "Foreign Trip", icon: "globe", monthly: "₹10,000" }
-            ];
-
-            const products = [
-                { category: "Organic Seeds", items: ["Vegetable Seeds", "Fruit Seeds", "Herb Seeds"] },
-                { category: "Fertilizers", items: ["Organic Compost", "Bio Fertilizers", "Vermicompost"] },
-                { category: "Gardening Tools", items: ["Pruning Tools", "Watering Equipment", "Planting Tools"] },
-                { category: "Grow Kits", items: ["Indoor Garden Kits", "Hydroponic Systems", "Terrarium Kits"] }
-            ];
-
-            const ProgressRing = ({ radius, stroke, progress }) => {
-                const normalizedRadius = radius - stroke * 2;
-                const circumference = normalizedRadius * 2 * Math.PI;
-                const strokeDashoffset = circumference - (progress / 100) * circumference;
-
-                return (
-                    <svg height={radius * 2} width={radius * 2}>
-                        <circle
-                            stroke="#e5e7eb"
-                            fill="transparent"
-                            strokeWidth={stroke}
-                            r={normalizedRadius}
-                            cx={radius}
-                            cy={radius}
-                        />
-                        <circle
-                            className="progress-ring__circle"
-                            stroke="#10b981"
-                            fill="transparent"
-                            strokeWidth={stroke}
-                            strokeDasharray={circumference + ' ' + circumference}
-                            style={{ strokeDashoffset }}
-                            r={normalizedRadius}
-                            cx={radius}
-                            cy={radius}
-                        />
-                        <text
-                            x="50%"
-                            y="50%"
-                            textAnchor="middle"
-                            dy=".3em"
-                            fill="#10b981"
-                            className="text-xl font-bold"
-                        >
-                            {progress}%
-                        </text>
-                    </svg>
-                );
-            };
-
-            return (
-                <div className="min-h-screen">
-                    {/* Hero Section */}
-                    <motion.section 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8 }}
-                        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 to-white"
-                    >
-                        <div className="max-w-7xl mx-auto text-center">
-                            <motion.h1 
-                                initial={{ y: -20 }}
-                                animate={{ y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4"
-                            >
-                                GREEN GROW
-                            </motion.h1>
-                            <motion.p 
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.3, duration: 0.8 }}
-                                className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto"
-                            >
-                                Growing Together, Globally
-                            </motion.p>
+                <div class="bg-gray-50 rounded-xl p-8 card-shadow" data-aos="fade-left">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-green-100 mr-4">
+                            <i data-feather="award" class="green-accent"></i>
                         </div>
-                    </motion.section>
+                        <h3 class="text-xl font-semibold text-gray-800">Total Points</h3>
+                    </div>
+                    <div class="text-4xl font-bold green-accent mb-2" id="totalPointsCounter">0</div>
+                    <p class="text-gray-500">Community points accumulated</p>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-8 card-shadow max-w-2xl mx-auto" data-aos="fade-up">
+                <h3 class="text-xl font-semibold text-center text-gray-800 mb-6">Target Board</h3>
+                <div class="flex justify-center">
+                    <div class="relative w-64 h-64">
+                        <svg class="w-full h-full" viewBox="0 0 100 100">
+                            <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                            <circle class="text-green-500 progress-ring__circle" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" stroke-dasharray="251.2" stroke-dashoffset="calc(251.2 - (251.2 * 72) / 100)" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <span class="text-3xl font-bold green-accent">72%</span>
+                            <span class="text-gray-500">Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    {/* Global Pool & Points */}
-                    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-                        <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Global Performance</h2>
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                {/* Global Pool Card */}
-                                <motion.div 
-                                    whileHover={{ y: -5 }}
-                                    className="bg-white rounded-xl shadow-lg p-6 border border-gray-100"
-                                >
-                                    <div className="flex items-center mb-4">
-                                        <div className="p-3 rounded-lg bg-green-50 mr-4">
-                                            <i data-feather="database" className="text-green-600"></i>
-                                        </div>
-                                        <h3 className="text-lg font-semibold text-gray-700">Global Pool</h3>
-                                    </div>
-                                    <div className="text-3xl font-bold text-gray-900 mb-2">₹{globalPool}</div>
-                                    <p className="text-green-600 flex items-center">
-                                        <i data-feather="trending-up" className="mr-2"></i>
-                                        <span>12.5% growth this month</span>
-                                    </p>
-                                </motion.div>
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Top Performers Leaderboard</h2>
+            
+            <div class="bg-white rounded-xl overflow-hidden card-shadow" data-aos="fade-up">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer ID</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Points</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Recruits</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="leaderboardBody">
+                            <!-- Rows will be added by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                {/* Total Points Card */}
-                                <motion.div 
-                                    whileHover={{ y: -5 }}
-                                    className="bg-white rounded-xl shadow-lg p-6 border border-gray-100"
-                                >
-                                    <div className="flex items-center mb-4">
-                                        <div className="p-3 rounded-lg bg-green-50 mr-4">
-                                            <i data-feather="star" className="text-green-600"></i>
-                                        </div>
-                                        <h3 className="text-lg font-semibold text-gray-700">Total Points</h3>
-                                    </div>
-                                    <div className="text-3xl font-bold text-gray-900 mb-2">{totalPoints}</div>
-                                    <p className="text-green-600 flex items-center">
-                                        <i data-feather="users" className="mr-2"></i>
-                                        <span>8,425 members contributing</span>
-                                    </p>
-                                </motion.div>
+    <!-- Rewards Section -->
+    <section id="rewards" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Achievements & Rewards</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+                <!-- Top 5 Rewards -->
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="award" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 1</h3>
+                    <p class="text-gray-600 mb-4">Car</p>
+                    <p class="text-sm text-gray-500">Luxury vehicle for top performer</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="award" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 2</h3>
+                    <p class="text-gray-600 mb-4">Bike</p>
+                    <p class="text-sm text-gray-500">Premium motorcycle reward</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="award" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 3</h3>
+                    <p class="text-gray-600 mb-4">Gold</p>
+                    <p class="text-sm text-gray-500">100g pure gold investment</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="award" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 4</h3>
+                    <p class="text-gray-600 mb-4">iPhone</p>
+                    <p class="text-sm text-gray-500">Latest smartphone model</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="award" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 5</h3>
+                    <p class="text-gray-600 mb-4">Foreign Trip</p>
+                    <p class="text-sm text-gray-500">All-expense paid vacation</p>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-center text-gray-900 mb-8" data-aos="fade-up">Monthly Passive Rewards</h3>
+            
+            <div class="grid md:grid-cols-5 gap-6">
+                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="dollar-sign" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 1</h3>
+                    <p class="text-2xl font-bold green-accent mb-4">₹50,000</p>
+                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                </div>
+                
+                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="dollar-sign" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 2</h3>
+                    <p class="text-2xl font-bold green-accent mb-4">₹40,000</p>
+                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                </div>
+                
+                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="dollar-sign" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 3</h3>
+                    <p class="text-2xl font-bold green-accent mb-4">₹30,000</p>
+                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                </div>
+                
+                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="dollar-sign" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 4</h3>
+                    <p class="text-2xl font-bold green-accent mb-4">₹20,000</p>
+                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                </div>
+                
+                <div class="bg-green-50 rounded-xl p-6 card-shadow flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                        <i data-feather="dollar-sign" class="green-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Top 5</h3>
+                    <p class="text-2xl font-bold green-accent mb-4">₹10,000</p>
+                    <p class="text-sm text-gray-500">Monthly passive income</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                {/* Target Board */}
-                                <motion.div 
-                                    whileHover={{ y: -5 }}
-                                    className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 flex flex-col items-center justify-center"
-                                >
-                                    <h3 className="text-lg font-semibold text-gray-700 mb-4">Quarterly Target</h3>
-                                    <ProgressRing radius={60} stroke={8} progress={progress} />
-                                    <p className="mt-4 text-gray-600 text-center">
-                                        {progress}% of ₹15M target achieved
-                                    </p>
-                                </motion.div>
+    <!-- Products Section -->
+    <section id="products" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Our Products</h2>
+            
+            <div class="text-center mb-12" data-aos="fade-up">
+                <button id="viewProductsBtn" class="px-8 py-3 rounded-full green-bg text-white hover-green transition text-lg font-medium">
+                    View Products
+                </button>
+            </div>
+            
+            <!-- Products Modal (hidden by default) -->
+            <div id="productsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Product Catalog</h3>
+                            <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
+                                <img src="http://static.photos/technology/640x360/1" alt="Product 1" class="w-full h-48 object-cover rounded-lg mb-4">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Premium Package</h4>
+                                <p class="text-gray-600 mb-4">Our flagship product with all premium features</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold green-accent">₹15,999</span>
+                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
+                                </div>
                             </div>
-                        </div>
-                    </section>
-
-                    {/* Leaderboard Section */}
-                    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-                        <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Top Performers</h2>
                             
-                            <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-                                <div className="overflow-x-auto">
-                                    <table className="min-w-full divide-y divide-gray-200">
-                                        <thead className="bg-gray-50">
-                                            <tr>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer ID</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Points</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Recruits</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="bg-white divide-y divide-gray-200">
-                                            {leaderboardData.map((item, index) => (
-                                                <motion.tr 
-                                                    key={index}
-                                                    whileHover={{ backgroundColor: "#f9fafb" }}
-                                                    className="hover:bg-gray-50 transition-colors"
-                                                >
-                                                    <td className="px-6 py-4 whitespace-nowrap">
-                                                        <div className="flex items-center">
-                                                            <span className={`flex items-center justify-center w-8 h-8 rounded-full ${item.rank <= 3 ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'} font-semibold`}>
-                                                                {item.rank}
-                                                            </span>
-                                                        </div>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.name}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.customerId}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.points}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.recruits}</td>
-                                                </motion.tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
+                                <img src="http://static.photos/technology/640x360/2" alt="Product 2" class="w-full h-48 object-cover rounded-lg mb-4">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Standard Package</h4>
+                                <p class="text-gray-600 mb-4">Great value with essential features</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold green-accent">₹9,999</span>
+                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
+                                <img src="http://static.photos/technology/640x360/3" alt="Product 3" class="w-full h-48 object-cover rounded-lg mb-4">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Basic Package</h4>
+                                <p class="text-gray-600 mb-4">Entry-level product for beginners</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold green-accent">₹5,999</span>
+                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-xl p-6 card-shadow">
+                                <img src="http://static.photos/technology/640x360/4" alt="Product 4" class="w-full h-48 object-cover rounded-lg mb-4">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Starter Kit</h4>
+                                <p class="text-gray-600 mb-4">Perfect for trying out our system</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold green-accent">₹2,999</span>
+                                    <button class="px-4 py-2 rounded-full green-bg text-white hover-green transition text-sm">Add to Cart</button>
                                 </div>
                             </div>
                         </div>
-                    </section>
-
-                    {/* Rewards Section */}
-                    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-                        <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Top Achievers' Rewards</h2>
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-16">
-                                {rewards.map((reward, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.1, duration: 0.5 }}
-                                        whileHover={{ scale: 1.05 }}
-                                        className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 text-center p-6"
-                                    >
-                                        <div className={`flex items-center justify-center w-16 h-16 rounded-full mx-auto mb-4 ${index === 0 ? 'bg-yellow-100' : index === 1 ? 'bg-gray-100' : index === 2 ? 'bg-amber-100' : 'bg-blue-50'}`}>
-                                            <i data-feather={reward.icon} className={`${index === 0 ? 'text-yellow-600' : index === 1 ? 'text-gray-600' : index === 2 ? 'text-amber-600' : 'text-blue-500'} w-8 h-8`}></i>
-                                        </div>
-                                        <h3 className="text-xl font-semibold text-gray-900 mb-2">Rank #{reward.rank}</h3>
-                                        <p className="text-gray-600 mb-4">{reward.title}</p>
-                                        <div className="bg-green-50 rounded-lg py-2 px-4">
-                                            <p className="text-green-700 font-medium">Monthly: {reward.monthly}</p>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Products Section */}
-                    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-                        <div className="max-w-7xl mx-auto text-center">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Premium Products</h2>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setIsProductsOpen(true)}
-                                className="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-lg shadow-md transition-all"
-                            >
-                                View Products
-                            </motion.button>
-                        </div>
-                    </section>
-
-                    {/* Footer */}
-                    <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-                        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div>
-                                <h3 className="text-xl font-bold mb-4">GREEN GROW</h3>
-                                <p className="text-gray-400">Growing Together, Globally through sustainable practices and community building.</p>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-                                <ul className="space-y-2">
-                                    <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                                    <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                                    <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-                                <ul className="space-y-2 text-gray-400">
-                                    <li className="flex items-center"><i data-feather="mail" className="mr-2"></i> contact@greengrow.com</li>
-                                    <li className="flex items-center"><i data-feather="phone" className="mr-2"></i> +1 (555) 123-4567</li>
-                                    <li className="flex items-center"><i data-feather="map-pin" className="mr-2"></i> 123 Green St, Eco City</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-gray-800 text-center text-gray-500">
-                            <p>© {new Date().getFullYear()} GREEN GROW. All rights reserved.</p>
-                        </div>
-                    </footer>
-
-                    {/* Products Modal */}
-                    <AnimatePresence>
-                        {isProductsOpen && (
-                            <motion.div 
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-                                onClick={() => setIsProductsOpen(false)}
-                            >
-                                <motion.div 
-                                    initial={{ scale: 0.9, y: 50 }}
-                                    animate={{ scale: 1, y: 0 }}
-                                    exit={{ scale: 0.9, y: 50 }}
-                                    className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <div className="p-6">
-                                        <div className="flex justify-between items-center mb-6">
-                                            <h3 className="text-2xl font-bold text-gray-900">Our Products</h3>
-                                            <button 
-                                                onClick={() => setIsProductsOpen(false)}
-                                                className="text-gray-500 hover:text-gray-700"
-                                            >
-                                                <i data-feather="x"></i>
-                                            </button>
-                                        </div>
-                                        
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            {products.map((product, index) => (
-                                                <motion.div
-                                                    key={index}
-                                                    initial={{ opacity: 0, y: 20 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    transition={{ delay: index * 0.1 }}
-                                                    className="bg-gray-50 rounded-lg p-6 border border-gray-200"
-                                                >
-                                                    <h4 className="text-lg font-semibold text-gray-900 mb-4">{product.category}</h4>
-                                                    <ul className="space-y-2">
-                                                        {product.items.map((item, itemIndex) => (
-                                                            <li key={itemIndex} className="flex items-center">
-                                                                <i data-feather="check-circle" className="text-green-500 mr-2"></i>
-                                                                <span className="text-gray-700">{item}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </motion.div>
-                                            ))}
-                                        </div>
-                                        
-                                        <div className="mt-8 flex justify-center">
-                                            <button 
-                                                onClick={() => setIsProductsOpen(false)}
-                                                className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg shadow transition-colors"
-                                            >
-                                                Close
-                                            </button>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    </div>
                 </div>
-            );
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">GREEN GROW</h3>
+                    <p class="text-gray-400">Growing Together, Globally</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#global-pool" class="text-gray-400 hover:text-white transition">Global Pool</a></li>
+                        <li><a href="#leaderboard" class="text-gray-400 hover:text-white transition">Leaderboard</a></li>
+                        <li><a href="#rewards" class="text-gray-400 hover:text-white transition">Rewards</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400"><i data-feather="mail" class="mr-2"></i> info@greengrow.com</li>
+                        <li class="flex items-center text-gray-400"><i data-feather="phone" class="mr-2"></i> +1 (555) 123-4567</li>
+                        <li class="flex items-center text-gray-400"><i data-feather="map-pin" class="mr-2"></i> 123 Business Ave, Suite 100</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 GREEN GROW. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Counter animation for statistics
+        function animateCounter(elementId, targetValue, duration = 2000) {
+            const element = document.getElementById(elementId);
+            const start = 0;
+            const increment = targetValue / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= targetValue) {
+                    clearInterval(timer);
+                    current = targetValue;
+                }
+                element.textContent = Math.floor(current).toLocaleString();
+            }, 16);
         }
 
-        ReactDOM.render(<App />, document.getElementById('root'));
+        // Animate counters when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('globalPoolCounter', 12500000);
+                    animateCounter('totalPointsCounter', 8425000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('global-pool'));
+
+        // Leaderboard data
+        const leaderboardData = [
+            { rank: 1, name: "Alex Johnson", customerId: "GG12345", points: "1,250,000", recruits: 42 },
+            { rank: 2, name: "Sarah Williams", customerId: "GG12346", points: "1,100,000", recruits: 38 },
+            { rank: 3, name: "Michael Brown", customerId: "GG12347", points: "980,000", recruits: 35 },
+            { rank: 4, name: "Emily Davis", customerId: "GG12348", points: "875,000", recruits: 32 },
+            { rank: 5, name: "David Miller", customerId: "GG12349", points: "820,000", recruits: 30 },
+            { rank: 6, name: "Jessica Wilson", customerId: "GG12350", points: "790,000", recruits: 28 },
+            { rank: 7, name: "Daniel Moore", customerId: "GG12351", points: "750,000", recruits: 27 },
+            { rank: 8, name: "Olivia Taylor", customerId: "GG12352", points: "710,000", recruits: 26 },
+            { rank: 9, name: "James Anderson", customerId: "GG12353", points: "680,000", recruits: 25 },
+            { rank: 10, name: "Sophia Thomas", customerId: "GG12354", points: "650,000", recruits: 24 }
+        ];
+
+        // Populate leaderboard
+        const leaderboardBody = document.getElementById('leaderboardBody');
+        leaderboardData.forEach(item => {
+            const row = document.createElement('tr');
+            row.className = 'hover:bg-gray-50 transition';
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.rank}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.name}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.customerId}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.points}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.recruits}</td>
+            `;
+            leaderboardBody.appendChild(row);
+        });
+
+        // Products modal functionality
+        const viewProductsBtn = document.getElementById('viewProductsBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const productsModal = document.getElementById('productsModal');
+
+        viewProductsBtn.addEventListener('click', () => {
+            productsModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            productsModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        productsModal.addEventListener('click', (e) => {
+            if (e.target === productsModal) {
+                productsModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
-    <script>feather.replace();</script>
 </body>
 </html>
