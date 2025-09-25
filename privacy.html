@@ -1,0 +1,242 @@
+Build a complete professional website + webapp for 
+"GREEN GROW PRIVATE LIMITED" with full frontend, backend, and database.
+
+---
+
+🎨 FRONTEND REQUIREMENTS (UI/UX)
+- Premium, futuristic SaaS-style design.
+- Colors: Green (#28a745), White, Gold accent.
+- Fonts: Poppins / Inter (modern clean fonts).
+- Glassmorphism + gradient backgrounds.
+- Fully animated (fade-in, slide, count-up, hover glow).
+- Responsive for desktop, tablet, mobile.
+- Dark mode + Light mode toggle.
+- Accessibility enabled (ARIA labels, screen reader friendly).
+- Multi-language support (English + Hindi).
+
+Core animations:
+- Count-up for numbers (pool balance, points).
+- Progress bar fills smoothly.
+- Leaderboard rows slide-in sequentially.
+- Spin wheel rotation with easing + fireworks.
+- Confetti on success actions (signup, reward claim).
+- Smooth page transitions (slide, fade).
+
+---
+
+⚙️ BACKEND REQUIREMENTS
+- Use Firebase Authentication for signup/login.
+- Use Firestore database for users, transactions, pool, points, rewards.
+- Firebase Cloud Functions for backend logic:
+  - Payment processing (integrated with Razorpay/Stripe/UPI).
+  - Pool distribution every month.
+  - Referral commission auto-credit.
+  - Rewards eligibility auto-check.
+  - Spin-to-win random selection.
+- Firebase Storage for profile pictures, documents.
+- Firebase Hosting for fast delivery.
+- Firebase Cloud Messaging for push notifications.
+
+Security:
+- Password hashing + 2FA with OTP (Firebase Auth).
+- Encrypted bank details.
+- Role-based access (User vs Admin).
+- Full transaction logs.
+
+---
+
+💰 BUSINESS LOGIC (BACKEND RULES)
+1. Joining:
+   - New user pays ₹10,000.
+   - Backend auto-splits:
+     - ₹3,000 → Products
+     - ₹1,000 → Sponsor Commission
+     - ₹3,000 → Reserve Fund
+     - ₹500 → Rewards Fund
+     - ₹2,500 → Global Pool
+   - Transaction stored in DB.
+
+2. Referral:
+   - Each user has unique referral code.
+   - New user can join with referral code.
+   - Sponsor instantly gets:
+     - ₹1,000 commission
+     - +10 points
+   - Referral recorded in DB.
+
+3. Points:
+   - Referral = 10 points.
+   - Product sale = 1 point.
+   - Points table updates in real-time.
+
+4. Global Pool:
+   - ₹2,500 from each join → Pool.
+   - Pool balance auto-updates in DB.
+   - At month-end, pool distributed:
+     - Each user gets % based on their points.
+   - Auto-reset pool after distribution.
+
+5. Rewards:
+   - Top 5 monthly users (by points):
+     - #1 Car + ₹50,000 passive next month
+     - #2 Bike + ₹40,000 passive
+     - #3 Gold + ₹30,000 passive
+     - #4 iPhone + ₹20,000 passive
+     - #5 Foreign Trip + ₹10,000 passive
+   - Passive income expires if user not in top next month.
+   - Random Spin Prize:
+     - Winner gets ₹10k–₹1 lakh.
+     - Stored in Rewards DB.
+
+---
+
+📊 DATABASE STRUCTURE (Firestore Collections)
+
+- Users:
+  { id, name, email, phone, passwordHash, referralCode, sponsorID, city, country, zip, profilePic, joinDate }
+
+- BankDetails:
+  { userID, accountHolder, accountNumber, IFSC, bankName, UPI, updatedAt }
+
+- Referrals:
+  { referrerID, newUserID, commission, points, date }
+
+- Transactions:
+  { txnID, userID, amount, type [join, commission, pool payout, reward], date }
+
+- Pool:
+  { monthID, totalBalance, distributed: true/false, distributionDetails }
+
+- Points:
+  { userID, totalPoints, referralPoints, salesPoints, month }
+
+- Rewards:
+  { rewardID, userID, rewardType [car, bike, etc], amount, month, status }
+
+- Notifications:
+  { userID, title, message, read/unread, date }
+
+---
+
+📌 PAGES (Frontend + Features)
+
+1. HOME PAGE
+- Hero: "GREEN GROW PRIVATE LIMITED"
+- Tagline: "Join, Earn, Grow — Transparent Monthly Rewards"
+- CTA: "Join Now", "Login"
+- Live Widgets (from backend):
+  - Global Pool Balance (count-up)
+  - Total Points Earned
+  - Monthly Target (2000 recruiters → progress bar)
+  - Leaderboard (live top users)
+
+2. HOW IT WORKS PAGE
+- Step flow with animations
+- Earnings calculator (dynamic form)
+
+3. REWARDS PAGE
+- Showcase of rewards
+- Spin-to-Win wheel (real-time)
+- Past winners list
+
+4. SIGNUP PAGE
+- Multi-step wizard:
+  - Step 1: Email, Password
+  - Step 2: Personal Info (Full Name, Phone, Country, City, Zip)
+  - Step 3: Referral Code (optional)
+  - Step 4: Payment (₹10,000 via gateway)
+  - Step 5: Profile picture upload
+- OTP verification
+- Confetti on success
+
+5. LOGIN PAGE
+- Clean login
+- Forgot password option
+- Animated background
+
+6. DASHBOARD (User)
+- Stats cards:
+  - Current Points
+  - Referrals
+  - Earnings
+  - Pool Share
+  - Rank
+- Leaderboard widget
+- Global Pool widget
+- Activity feed
+- Referral code (share button)
+- Bank Details section (add/edit)
+- Rewards tracker
+- Notifications center
+
+7. PERSONAL INFO PAGE
+- Editable user info
+- Save with animation
+
+8. LEADERBOARD PAGE
+- Full user leaderboard
+- Top 3 glowing badges
+
+9. GLOBAL POOL PAGE
+- Pool balance
+- Pie chart of split
+- Countdown timer
+- User’s payout preview
+
+10. REWARDS CLAIM PAGE
+- Claimable rewards catalog
+- Claim success animation
+
+11. SPIN PRIZE PAGE
+- Interactive spin wheel
+- Fireworks on win
+- Past winners list
+
+12. CONTACT PAGE
+- Contact form
+- FAQ accordion
+- Support ticket system
+- Live chat
+
+13. ADMIN DASHBOARD
+- Manage users
+- Pool distribution
+- Payout approvals
+- Push notifications
+- Analytics
+
+14. MICRO PAGES
+- 404, 500, Maintenance (animated)
+
+---
+
+📌 USER FEATURES
+- Join via referral + payment.
+- Unique referral code.
+- Real-time dashboard (points, pool, rewards).
+- Bank details for payout.
+- Transaction history.
+- Spin-to-win access.
+- Notifications (push, email, SMS).
+
+📌 ADMIN FEATURES
+- Approve payouts.
+- Manage users.
+- Manage rewards.
+- Pool auto-distribution.
+- Analytics (charts, growth, pool stats).
+- Push notifications to users.
+
+---
+
+✅ Final Output:
+A **fully animated, responsive, Firebase-based website** with both frontend & backend, including:
+- Authentication
+- Payments
+- Referrals
+- Global Pool
+- Leaderboard
+- Rewards
+- Spin Prize
+- Payout system
+- Admin Panel
