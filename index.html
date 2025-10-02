@@ -602,7 +602,7 @@
         // Counter animations
         function animateCounter(elementId, target, duration = 2000) {
             const element = document.getElementById(elementId);
-            const start = 10;
+            const start = 0;
             const increment = target / (duration / 16);
             let current = start;
             
@@ -619,7 +619,7 @@
         // Animate global pool and total points counters
         setTimeout(() => {
             animateCounter('globalPoolCounter', 15000);
-            animateCounter('totalPointsCounter', 00000);
+            animateCounter('totalPointsCounter', 10);
         }, 500);
 
         // Progress chart
