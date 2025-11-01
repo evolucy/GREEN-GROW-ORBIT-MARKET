@@ -618,8 +618,8 @@
 
         // Animate global pool and total points counters
         setTimeout(() => {
-            animateCounter('globalPoolCounter', 95000);
-            animateCounter('totalPointsCounter', 350);
+            animateCounter('globalPoolCounter', 0);
+            animateCounter('totalPointsCounter', 0);
         }, 500);
 
         // Progress chart
@@ -629,7 +629,7 @@
             const progressText = document.getElementById('progressText');
             
             const targetPoints = 2000;
-            const currentPoints = 38;
+            const currentPoints = 0;
             const currentProgress = (currentPoints / targetPoints) * 100;
             
             const progressChart = new Chart(ctx, {
@@ -682,21 +682,21 @@
 
         // Leaderboard data
         const leaderboardData = [
-  { "rank": 1, "name": "Sonbati", "customerId": "GG5018", "points": "70", "recruits": 7 },
-  { "rank": 2, "name": "Rizwan Khan", "customerId": "GG5015", "points": "60", "recruits": 6 },
-  { "rank": 3, "name": "Bina Dewangan", "customerId": "GG5017", "points": "30", "recruits": 3 },
-  { "rank": 4, "name": "Ashwant", "customerId": "GG5013", "points": "30", "recruits": 3 },
-  { "rank": 5, "name": "Abdhesh Kushawaha", "customerId": "GG5010", "points": "30", "recruits": 3 }, 
-  { "rank": 6, "name": "Komin Sahu", "customerId": "GG5032", "points": "30", "recruits": 3 },
-  { "rank": 7, "name": "Dhamin Sahu", "customerId": "GG5034", "points": "20", "recruits": 2 },
-  { "rank": 8, "name": "kusumlatha", "customerId": "GG5027", "points": "10", "recruits": 1 },
-  { "rank": 9, "name": "BED BAI YADAV", "customerId": "GG5037", "points": "10", "recruits": 1 },
-  { "rank": 10, "name": "Jageshwari Sahu", "customerId": "GG5011", "points": "10", "recruits": 1 },
-  { "rank": 11, "name": "Upendra Deshmukh", "customerId": "GG5031", "points": "10", "recruits": 1 },
-  { "rank": 12, "name": "Chandrakala", "customerId": "GG5024", "points": "10", "recruits": 1 },
-  { "rank": 13, "name": "MANOJ KUMAR", "customerId": "GG5036", "points": "10", "recruits": 1 },
-  { "rank": 14, "name": "KALYANI NISHAD", "customerId": "GG5042", "points": "10", "recruits": 1 },
-  { "rank": 15, "name": "Gulshan kumar sahu", "customerId": "GG5016", "points": "10", "recruits": 1 },
+  { "rank": 1, "name": "Sonbati", "customerId": "GG5018", "points": "000", "recruits": 0 },
+  { "rank": 2, "name": "Rizwan Khan", "customerId": "GG5015", "points": "000", "recruits":  },
+  { "rank": 3, "name": "Bina Dewangan", "customerId": "GG5017", "points": "000", "recruits": 0},
+  { "rank": 4, "name": "Ashwant", "customerId": "GG5013", "points": "000", "recruits": 0 },
+  { "rank": 5, "name": "Abdhesh Kushawaha", "customerId": "GG5010", "points": "000", "recruits": 0 }, 
+  { "rank": 6, "name": "Komin Sahu", "customerId": "GG5032", "points": "000", "recruits": 0 },
+  { "rank": 7, "name": "Dhamin Sahu", "customerId": "GG5034", "points": "000", "recruits": 0 },
+  { "rank": 8, "name": "kusumlatha", "customerId": "GG5027", "points": "000", "recruits": 0 },
+  { "rank": 9, "name": "BED BAI YADAV", "customerId": "GG5037", "points": "000", "recruits":  },
+  { "rank": 10, "name": "Jageshwari Sahu", "customerId": "GG5011", "points": "000", "recruits": 0 },
+  { "rank": 11, "name": "Upendra Deshmukh", "customerId": "GG5031", "points": "000", "recruits": 0 },
+  { "rank": 12, "name": "Chandrakala", "customerId": "GG5024", "points": "000", "recruits": 0 },
+  { "rank": 13, "name": "MANOJ KUMAR", "customerId": "GG5036", "points": "000", "recruits": 0 },
+  { "rank": 14, "name": "KALYANI NISHAD", "customerId": "GG5042", "points": "000", "recruits": 0 },
+  { "rank": 15, "name": "Gulshan kumar sahu", "customerId": "GG5016", "points": "000", "recruits": 0 },
   { "rank": 16, "name": "Abdul Aziz Mondal", "customerId": "GG5012", "points": "0000", "recruits": 0 },
   { "rank": 17, "name": "Lalchand Sahu", "customerId": "GG5014", "points": "0000", "recruits": 0 },
   { "rank": 18, "name": "prema", "customerId": "GG5019", "points": "0000", "recruits": 0 },
